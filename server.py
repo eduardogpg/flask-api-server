@@ -34,7 +34,7 @@ def unauthorized():
 @auth.get_password
 def get_password(username):
     return get_user(username)
-    
+
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({'error': 'task not found'}),  400)
@@ -50,7 +50,6 @@ def get_tasks():
     tasks = get_tasks_list()
 
     if order:
-        print("Entramos aquí")
         tasks = sorted(tasks, key= lambda k : k['priority'], reverse=True)
 
     return jsonify( {'tasks' : [make_public_task(task) for task in tasks]} ) #return jsonify( {'tasks' : get_tasks_list() } )
